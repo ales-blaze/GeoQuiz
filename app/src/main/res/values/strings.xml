@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="correct_toast">Correct</string>
+    <string name="incorrect_toast">InCorrect</string>
+
+
+    <string name="question1"> Meditation is good for a person </string>
+    <string name="question2"> Modi ji P.M. of the India</string>
+    <string name="question3"> America a developed country</string>
+    <string name="question4"> 70% place is acquired by land on earth</string>
+
+
+    <string name="previous_image_button_description">This button will display previous question on the screen</string>
+    <string name="next_image_button_description">This button will display next question on the screen</string>
+    <string name="arrow_right_description">shows previous question</string>
+    <string name="arrow_left_description">shows next question on the screen</string>
+    <string name="warning_text">Do you really want to cheat?</string>
+    <string name="cheat_text">Cheat</string>
+    <string name="show_answer_text">Show Answer</string>
+    <string name="judgement_statement">Cheating is wrong</string>
+</resources>
