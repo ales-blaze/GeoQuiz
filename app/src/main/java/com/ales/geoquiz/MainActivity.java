@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private final static boolean FALSE = false;
     private static final String INDEX = "index";
     private static final int CHEAT_REQUEST_CODE = 0;
+    private static final String IS_CHEATER = "cheater";
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question1, true),
             new Question(R.string.question2, true),
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState()");
         outState.putInt(INDEX, mCurrentIndex);
+        outState.putBoolean(IS_CHEATER , mIsCheater);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView = findViewById(R.id.question_text_view);
         mPreviousButton = findViewById(R.id.previous_button);
 
-        mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
+//        mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
 
         mQuestionTextView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -118,9 +120,12 @@ public class MainActivity extends AppCompatActivity {
                 mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
             }
         });
+
         if(savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(INDEX);
             mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
+            mIsCheater = savedInstanceState.getBoolean(IS_CHEATER);
+            checkAnswer(mIsCheater);
         }
     }
 
