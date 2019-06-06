@@ -1,6 +1,5 @@
 package com.ales.geoquiz;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mTrueButton , mFalseButton , mCheatButton ;
     private ImageButton mNextButton , mPreviousButton;
     private TextView mQuestionTextView;
+    private boolean mCheatArray[];
     private final static boolean TRUE = true;
     private final static boolean FALSE = false;
     private static final String INDEX = "index";
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         boolean result = mQuestionBank[mCurrentIndex].isCorrectAnswer();
         int messageID = 0;
 
-        if (mIsCheater) {
+        if (mCheatArray[mCurrentIndex]) {
             messageID = R.string.judgement_statement;
         }
         else if ( result == answer) {
@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState()");
         outState.putInt(INDEX, mCurrentIndex);
-        outState.putBoolean(IS_CHEATER , mIsCheater);
+//        outState.putBoolean(IS_CHEATER , mIsCheater);
+        outState.putBooleanArray(IS_CHEATER , mCheatArray);
     }
 
     @Override
@@ -120,18 +121,22 @@ public class MainActivity extends AppCompatActivity {
                 mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
             }
         });
+        mCheatArray = new boolean[mQuestionBank.length];
 
         if(savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(INDEX);
             mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
-            mIsCheater = savedInstanceState.getBoolean(IS_CHEATER);
-            checkAnswer(mIsCheater);
+            mCheatArray = savedInstanceState.getBooleanArray(IS_CHEATER);
+            assert mCheatArray != null;
+            if ( mCheatArray[mCurrentIndex]) {
+                checkAnswer(mCheatArray[mCurrentIndex]);
+            }
         }
     }
 
     private void updateQuestion() {
         mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-        mIsCheater = false;
+//        mIsCheater = false;
         mQuestionTextView.setText(mQuestionBank[mCurrentIndex].getQuestionStringID());
     }
 
@@ -141,8 +146,14 @@ public class MainActivity extends AppCompatActivity {
         if ( resultCode == RESULT_OK ) {
             if ( requestCode == CHEAT_REQUEST_CODE ) {
                 if ( data != null ) {
-                    mIsCheater = CheatActivity.isAnswerShown(data);
-                    checkAnswer(mIsCheater);
+//                    boolean result = mCheatArray[mCurrentIndex] = CheatActivity.isAnswerShown(data);
+                    boolean result = false;
+                    if ( !mCheatArray[mCurrentIndex] ) {
+                        result = mCheatArray[mCurrentIndex] = CheatActivity.isAnswerShown(data);
+                    }
+                    if(result) {
+                        checkAnswer(result);
+                    }
                 }else {
                     return;
                 }

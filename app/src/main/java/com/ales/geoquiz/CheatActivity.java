@@ -72,7 +72,7 @@ public class CheatActivity extends AppCompatActivity {
 
     //Utility method
     public static boolean isAnswerShown( Intent intent) {
-        return intent.getBooleanExtra(ANSWER_SHOWN , false );
+        return intent.getBooleanExtra(ANSWER_SHOWN , false);
     }
 
 
