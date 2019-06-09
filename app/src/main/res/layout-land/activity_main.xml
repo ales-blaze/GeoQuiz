@@ -5,12 +5,28 @@
     >
 
     <Button
+        android:id="@+id/alter_question_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:rotation="-90"
+        android:text="@string/alter_question_data" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alter_user_data"
+        android:layout_gravity="center|start"
+        android:rotation="90"
+        android:text="@string/alter_user_data"
+        />
+    <Button
         android:id="@+id/cheat_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cheat_text"
         android:layout_gravity="bottom|center"
-        />
+        android:text="@string/cheat_text" />
+
 
     <TextView
         android:layout_width="wrap_content"

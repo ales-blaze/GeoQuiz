@@ -20,4 +20,10 @@
     <string name="cheat_text">Cheat</string>
     <string name="show_answer_text">Show Answer</string>
     <string name="judgement_statement">Cheating is wrong</string>
+    <string name="alter_question_data">alter question data</string>
+    <string name="alter_user_data">alter user data</string>
+    <string name="create">Create</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="read">Read</string>
 </resources>

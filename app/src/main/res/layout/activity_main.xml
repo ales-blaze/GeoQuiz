@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,4 +59,25 @@
             />
 
     </LinearLayout>
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/alter_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alter_user_data"
+            android:layout_marginStart="16dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alter_question_data"
+            android:id="@+id/alter_question_data"
+            />
+    </LinearLayout>
+
 </LinearLayout>

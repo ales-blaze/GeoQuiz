@@ -22,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String INDEX = "index";
     private static final int CHEAT_REQUEST_CODE = 0;
     private static final String IS_CHEATER = "cheater";
+    private static final String USER_DATA = "user";
+    private static final String QUESTION_DATA = "question";
+
+    private Button mAlterQuestionButton , mAlterUserButton;
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question1, true),
             new Question(R.string.question2, true),
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
         setContentView(R.layout.activity_main);
+
+        mAlterQuestionButton = findViewById(R.id.alter_question_data);
+        mAlterUserButton = findViewById(R.id.alter_data_button);
 
         mCheatButton = findViewById(R.id.cheat_button);
         mTrueButton = findViewById(R.id.true_button);
@@ -132,6 +139,22 @@ public class MainActivity extends AppCompatActivity {
                 checkAnswer(mCheatArray[mCurrentIndex]);
             }
         }
+
+        mAlterUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = OperationOption.createIntent(getApplicationContext() , USER_DATA);
+                startActivity(intent);
+            }
+        });
+
+        mAlterQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = OperationOption.createIntent(getApplicationContext() , QUESTION_DATA);
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateQuestion() {
