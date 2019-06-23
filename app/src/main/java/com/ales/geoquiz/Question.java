@@ -1,27 +1,53 @@
 package com.ales.geoquiz;
 
 public class Question {
-    private int mQuestionStringID;
-    private boolean mCorrectAnswer;
-
-    public int getQuestionStringID() {
-        return mQuestionStringID;
+    private int mID;
+//    private int mQuestionStringID;
+    private String mQuestionString;
+    private Boolean mCorrectAnswer;
+    public void setID(int ID) {
+        this.mID = ID;
     }
 
-    public void setQuestionStringID(int questionStringID) {
-        mQuestionStringID = questionStringID;
+    public int getID() {
+        return mID;
     }
 
-    public boolean isCorrectAnswer() {
+//    public int getQuestionStringID() {
+//        return mQuestionStringID;
+//    }
+
+//    public void setQuestionStringID(int questionStringID) {
+//        mQuestionStringID = questionStringID;
+//    }
+
+
+    public void setQuestionString(String questionString) {
+        mQuestionString = questionString;
+    }
+
+    public String getQuestionString() {
+        return mQuestionString;
+    }
+
+    public Boolean isCorrectAnswer() {
         return mCorrectAnswer;
     }
 
-    public void setCorrectAnswer(boolean correctAnswer) {
+    public void setCorrectAnswer(Boolean correctAnswer) {
         mCorrectAnswer = correctAnswer;
     }
 
-    public Question(int questionStringID, boolean correctAnswer){
-        mQuestionStringID = questionStringID;
+    public Question(String questionString, boolean correctAnswer){
+//        mQuestionStringID = questionStringID;
+        mQuestionString = questionString;
         mCorrectAnswer = correctAnswer;
+    }
+
+    public  Question(int id , String questionString , boolean correctAnswer ){
+        this.mID = id;
+//        this.mQuestionStringID = questionStringID;
+        this.mQuestionString = questionString;
+        this.mCorrectAnswer = correctAnswer;
     }
 }

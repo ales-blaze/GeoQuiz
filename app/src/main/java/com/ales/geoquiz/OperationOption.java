@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class OperationOption extends AppCompatActivity {
@@ -12,6 +13,13 @@ public class OperationOption extends AppCompatActivity {
     private static final String USER_ALTER = "com.ales.geoquiz.alter_user_data";
     private static final String USER = " User";
     private static final String QUESTION = " Question";
+
+    private boolean mIsUser = false;
+
+    public static final int CREATE = 1;
+    public static final int DELETE = 2;
+    public static final int UPDATE = 3;
+    public static final int READ   = 4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,18 +30,62 @@ public class OperationOption extends AppCompatActivity {
         mReadButton = findViewById(R.id.read_button);
         mUpdateButton = findViewById(R.id.update_button);
 
-        String isSelectionUser = getIntent().getStringExtra(USER_ALTER);
-        String isSelectionQuestion = getIntent().getStringExtra(QUESTION_DATA);
+        final String isSelectionUser = getIntent().getStringExtra(USER_ALTER);
+        final String isSelectionQuestion = getIntent().getStringExtra(QUESTION_DATA);
 
         if ( isSelectionUser != null && isSelectionUser.compareTo("user") == 0){
             setTextAsUser();
+            mIsUser = true;
         }
         else if ( isSelectionQuestion != null && isSelectionQuestion.compareTo("question") == 0 ){
             setTextAsQuestion();
+            mIsUser = false;
         }
 
         //listeners for the buttons
+        mCreateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mIsUser) {
+                    intentCreationForUserDataAlter(CREATE);
+                }else {
+                    intentCreationForQuestionDataAlter(CREATE);
+                }
+            }
+        });
+        mDeleteButton.setOnClickListener((view) -> {
+            if(mIsUser) {
+                intentCreationForUserDataAlter(DELETE);
+            }else {
+                intentCreationForQuestionDataAlter(DELETE);
+            }
+        });
 
+        mUpdateButton.setOnClickListener((view) -> {
+            if(mIsUser) {
+                intentCreationForUserDataAlter(UPDATE);
+            }else {
+                intentCreationForQuestionDataAlter(DELETE);
+            }
+        });
+
+        mReadButton.setOnClickListener( (view) -> {
+            if(mIsUser) {
+                intentCreationForUserDataAlter(READ);
+            }else {
+                intentCreationForQuestionDataAlter(READ);
+            }
+        });
+    }
+
+    private void intentCreationForQuestionDataAlter(int mode) {
+        Intent intent = QuestionDataAlter.createIntent(this , mode);
+        startActivity(intent);
+    }
+
+    private void intentCreationForUserDataAlter(int mode) {
+        Intent intent = UserDataAlter.createIntent(OperationOption.this, mode);
+        startActivity(intent);
     }
 
     private void setTextAsQuestion() {
